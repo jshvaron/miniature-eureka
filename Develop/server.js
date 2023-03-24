@@ -10,18 +10,19 @@ app.use(express.static('public'));
 //setting main route
 app.get('/', (req, res) => res.send ('Navigate to notes'));
 
-//GET * should return the index.html file.
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname, '../Develop/public/index.html'))
-})
 
+
+//imports /index router
+const indexRouter = require('./routes/index');
+    app.use('/',indexRouter);
 
 
 //imports /notes router
-const notesRouter = require('./routes/notes')
-    app.use('/notes', notesRouter)
+const notesRouter = require('./routes/notes');
+    app.use('/notes', notesRouter);
 
 
+    
 //logs if the server is working
 app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
