@@ -1,10 +1,17 @@
 const express = require('express');
-//sets port to 3001
+
 const PORT  = 3001;
 const app = express();
-const path = require('path')
-const notesData = require('./db/db.json')
+
+const path = require('path');
+const notesData = require('./db/db.json');
 const uuid = require('./helpers/uuid');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
+// body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 //allows us to use static files in the public folder 
@@ -44,10 +51,24 @@ app.post('/api/notes',(req, res) => {
             text,
             note_id: uuid(),
         };
-    }
+        //logs new note
+        console.log(newNote);
+        //read/parse db file,push newNote to db
+        const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+        notes.push(newNote)
+        //writes new note to db
+        fs.writeFileSync(`./db/db.json`, JSON.stringify(notes), console.log('I have a good memory!'))
 
+    };
 
 });
+
+
+
+
+
+
+
 
 
 //logs if the server is working
