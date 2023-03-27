@@ -9,6 +9,7 @@ const uuid = require('./helpers/uuid');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+
 // body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -20,17 +21,19 @@ app.use(express.static('public'));
 app.get('/', (req, res) => res.send ('Navigate to notes'));
 
 
-
 //imports /index router
 const indexRouter = require('./routes/index');
     app.use('/',indexRouter);
 ;
+
 
 //imports /notes router
 const notesRouter = require('./routes/notes');
     app.use('/notes', notesRouter);
 
 ;
+
+
 //read an return from /api in JSON, logs 'I CAN READ'
 app.get('/api/notes', (req, res) => {
     res.json(notesData)
@@ -64,9 +67,6 @@ app.post('/api/notes',(req, res) => {
 });
 
 
-
-
-
 // DELETE a note by ID
 app.delete('/api/notes/:id', (req, res) => {
     const { id } = req.params;
@@ -83,7 +83,7 @@ app.delete('/api/notes/:id', (req, res) => {
     // send a response back to the client
     res.json({ message: `Note with ID ${id} has been deleted.` });
   });
-
+;
 
 
 //logs if the server is working

@@ -74,6 +74,7 @@ const handleNoteSave = () => {
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+    location.reload();// reload on save is not working correctly, page is reloading but not pulling the data
   });
 };
 
@@ -92,6 +93,7 @@ const handleNoteDelete = (e) => {
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+    location.reload();// reload on delete is not working correctly, page is reloading but not pulling the data
   });
 };
 
