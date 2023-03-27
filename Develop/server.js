@@ -29,8 +29,8 @@ const indexRouter = require('./routes/index');
 //imports /notes router
 const notesRouter = require('./routes/notes');
     app.use('/notes', notesRouter);
-;
 
+;
 //read an return from /api in JSON, logs 'I CAN READ'
 app.get('/api/notes', (req, res) => {
     res.json(notesData)
@@ -49,7 +49,7 @@ app.post('/api/notes',(req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuid(),
+            id: uuid(),
         };
         //logs new note
         console.log(newNote);
